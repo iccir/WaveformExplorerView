@@ -1,0 +1,356 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5521DE9E188E79F900222363 /* WaveRepresentationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5521DE9D188E79F900222363 /* WaveRepresentationView.m */; };
+		5521DEA7188E7A2300222363 /* liberty_bell.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5521DE9F188E7A2300222363 /* liberty_bell.m4a */; };
+		5521DEA8188E7A2300222363 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5521DEA1188E7A2300222363 /* AppDelegate.m */; };
+		5521DEA9188E7A2300222363 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5521DEA2188E7A2300222363 /* main.m */; };
+		5521DEAE188E7A9200222363 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5521DEAC188E7A9200222363 /* MainMenu.xib */; };
+		556E0E02188B659E005D80BF /* WaveSampleArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E0E01188B659E005D80BF /* WaveSampleArray.m */; };
+		557493271887EB2E00F7AD99 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557493261887EB2E00F7AD99 /* Cocoa.framework */; };
+		55BAB0AB1887EC36003D400B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BAB0AA1887EC36003D400B /* CoreAudio.framework */; };
+		55BAB0AD1887EC39003D400B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BAB0AC1887EC39003D400B /* QuartzCore.framework */; };
+		55BAB0B81888C2C8003D400B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BAB0B71888C2C8003D400B /* AudioToolbox.framework */; };
+		55BAB0BA1888C2CD003D400B /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BAB0B91888C2CD003D400B /* AudioUnit.framework */; };
+		55FF72F4188B776A00A8644D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF72F3188B776A00A8644D /* Accelerate.framework */; };
+		55FF72FA188C950300A8644D /* WaveChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF72F9188C950300A8644D /* WaveChannelView.m */; };
+		55FF72FD188C952600A8644D /* WaveExplorerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF72FC188C952600A8644D /* WaveExplorerView.m */; };
+		55FF7304188C97F500A8644D /* WaveChildView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF7303188C97F500A8644D /* WaveChildView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5521DE9C188E79F900222363 /* WaveRepresentationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveRepresentationView.h; path = Source/WaveRepresentationView.h; sourceTree = "<group>"; };
+		5521DE9D188E79F900222363 /* WaveRepresentationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveRepresentationView.m; path = Source/WaveRepresentationView.m; sourceTree = "<group>"; };
+		5521DE9F188E7A2300222363 /* liberty_bell.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = liberty_bell.m4a; path = Example/liberty_bell.m4a; sourceTree = SOURCE_ROOT; };
+		5521DEA0188E7A2300222363 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Example/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		5521DEA1188E7A2300222363 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Example/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		5521DEA2188E7A2300222363 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Example/main.m; sourceTree = SOURCE_ROOT; };
+		5521DEA3188E7A2300222363 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Example/Prefix.pch; sourceTree = SOURCE_ROOT; };
+		5521DEA4188E7A2300222363 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = SOURCE_ROOT; };
+		5521DEAD188E7A9200222363 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Example/Base.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		556E0E00188B659E005D80BF /* WaveSampleArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveSampleArray.h; path = Source/WaveSampleArray.h; sourceTree = SOURCE_ROOT; };
+		556E0E01188B659E005D80BF /* WaveSampleArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveSampleArray.m; path = Source/WaveSampleArray.m; sourceTree = SOURCE_ROOT; };
+		557493231887EB2E00F7AD99 /* WaveformExplorerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaveformExplorerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		557493261887EB2E00F7AD99 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		557493291887EB2E00F7AD99 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5574932A1887EB2E00F7AD99 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5574932B1887EB2E00F7AD99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		557493451887EB2E00F7AD99 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		55BAB0AA1887EC36003D400B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		55BAB0AC1887EC39003D400B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		55BAB0B71888C2C8003D400B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		55BAB0B91888C2CD003D400B /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		55FF72F3188B776A00A8644D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		55FF72F8188C950300A8644D /* WaveChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveChannelView.h; path = Source/WaveChannelView.h; sourceTree = SOURCE_ROOT; };
+		55FF72F9188C950300A8644D /* WaveChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveChannelView.m; path = Source/WaveChannelView.m; sourceTree = SOURCE_ROOT; };
+		55FF72FB188C952600A8644D /* WaveExplorerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveExplorerView.h; path = Source/WaveExplorerView.h; sourceTree = SOURCE_ROOT; };
+		55FF72FC188C952600A8644D /* WaveExplorerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveExplorerView.m; path = Source/WaveExplorerView.m; sourceTree = SOURCE_ROOT; };
+		55FF7302188C97F500A8644D /* WaveChildView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveChildView.h; path = Source/WaveChildView.h; sourceTree = "<group>"; };
+		55FF7303188C97F500A8644D /* WaveChildView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveChildView.m; path = Source/WaveChildView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		557493201887EB2E00F7AD99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55FF72F4188B776A00A8644D /* Accelerate.framework in Frameworks */,
+				55BAB0BA1888C2CD003D400B /* AudioUnit.framework in Frameworks */,
+				55BAB0B81888C2C8003D400B /* AudioToolbox.framework in Frameworks */,
+				55BAB0AD1887EC39003D400B /* QuartzCore.framework in Frameworks */,
+				55BAB0AB1887EC36003D400B /* CoreAudio.framework in Frameworks */,
+				557493271887EB2E00F7AD99 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5574931A1887EB2E00F7AD99 = {
+			isa = PBXGroup;
+			children = (
+				55FF7301188C955B00A8644D /* Classes */,
+				5574932C1887EB2E00F7AD99 /* Example App */,
+				557493251887EB2E00F7AD99 /* Frameworks */,
+				557493241887EB2E00F7AD99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		557493241887EB2E00F7AD99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				557493231887EB2E00F7AD99 /* WaveformExplorerView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		557493251887EB2E00F7AD99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55FF72F3188B776A00A8644D /* Accelerate.framework */,
+				55BAB0B91888C2CD003D400B /* AudioUnit.framework */,
+				55BAB0B71888C2C8003D400B /* AudioToolbox.framework */,
+				55BAB0AC1887EC39003D400B /* QuartzCore.framework */,
+				55BAB0AA1887EC36003D400B /* CoreAudio.framework */,
+				557493261887EB2E00F7AD99 /* Cocoa.framework */,
+				557493451887EB2E00F7AD99 /* XCTest.framework */,
+				557493281887EB2E00F7AD99 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		557493281887EB2E00F7AD99 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				557493291887EB2E00F7AD99 /* AppKit.framework */,
+				5574932A1887EB2E00F7AD99 /* CoreData.framework */,
+				5574932B1887EB2E00F7AD99 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		5574932C1887EB2E00F7AD99 /* Example App */ = {
+			isa = PBXGroup;
+			children = (
+				5521DEAC188E7A9200222363 /* MainMenu.xib */,
+				5521DE9F188E7A2300222363 /* liberty_bell.m4a */,
+				5521DEA0188E7A2300222363 /* AppDelegate.h */,
+				5521DEA1188E7A2300222363 /* AppDelegate.m */,
+				5521DEA2188E7A2300222363 /* main.m */,
+				5521DEA3188E7A2300222363 /* Prefix.pch */,
+				5521DEA4188E7A2300222363 /* Info.plist */,
+			);
+			name = "Example App";
+			path = WaveformView;
+			sourceTree = "<group>";
+		};
+		55FF7301188C955B00A8644D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				556E0E00188B659E005D80BF /* WaveSampleArray.h */,
+				556E0E01188B659E005D80BF /* WaveSampleArray.m */,
+				55FF72FB188C952600A8644D /* WaveExplorerView.h */,
+				55FF72FC188C952600A8644D /* WaveExplorerView.m */,
+				55FF7302188C97F500A8644D /* WaveChildView.h */,
+				55FF7303188C97F500A8644D /* WaveChildView.m */,
+				55FF72F8188C950300A8644D /* WaveChannelView.h */,
+				55FF72F9188C950300A8644D /* WaveChannelView.m */,
+				5521DE9C188E79F900222363 /* WaveRepresentationView.h */,
+				5521DE9D188E79F900222363 /* WaveRepresentationView.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		557493221887EB2E00F7AD99 /* WaveformExplorerView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 557493541887EB2E00F7AD99 /* Build configuration list for PBXNativeTarget "WaveformExplorerView" */;
+			buildPhases = (
+				5574931F1887EB2E00F7AD99 /* Sources */,
+				557493201887EB2E00F7AD99 /* Frameworks */,
+				557493211887EB2E00F7AD99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WaveformExplorerView;
+			productName = WaveformView;
+			productReference = 557493231887EB2E00F7AD99 /* WaveformExplorerView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5574931B1887EB2E00F7AD99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Ricci Adams";
+			};
+			buildConfigurationList = 5574931E1887EB2E00F7AD99 /* Build configuration list for PBXProject "WaveformExplorerView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5574931A1887EB2E00F7AD99;
+			productRefGroup = 557493241887EB2E00F7AD99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				557493221887EB2E00F7AD99 /* WaveformExplorerView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		557493211887EB2E00F7AD99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5521DEA7188E7A2300222363 /* liberty_bell.m4a in Resources */,
+				5521DEAE188E7A9200222363 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5574931F1887EB2E00F7AD99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55FF72FA188C950300A8644D /* WaveChannelView.m in Sources */,
+				55FF72FD188C952600A8644D /* WaveExplorerView.m in Sources */,
+				5521DE9E188E79F900222363 /* WaveRepresentationView.m in Sources */,
+				556E0E02188B659E005D80BF /* WaveSampleArray.m in Sources */,
+				55FF7304188C97F500A8644D /* WaveChildView.m in Sources */,
+				5521DEA9188E7A2300222363 /* main.m in Sources */,
+				5521DEA8188E7A2300222363 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5521DEAC188E7A9200222363 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5521DEAD188E7A9200222363 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		557493521887EB2E00F7AD99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		557493531887EB2E00F7AD99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		557493551887EB2E00F7AD99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Example/Prefix.pch;
+				INFOPLIST_FILE = Example/Info.plist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		557493561887EB2E00F7AD99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Example/Prefix.pch;
+				INFOPLIST_FILE = Example/Info.plist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5574931E1887EB2E00F7AD99 /* Build configuration list for PBXProject "WaveformExplorerView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				557493521887EB2E00F7AD99 /* Debug */,
+				557493531887EB2E00F7AD99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		557493541887EB2E00F7AD99 /* Build configuration list for PBXNativeTarget "WaveformExplorerView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				557493551887EB2E00F7AD99 /* Debug */,
+				557493561887EB2E00F7AD99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5574931B1887EB2E00F7AD99 /* Project object */;
+}
