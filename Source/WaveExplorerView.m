@@ -89,6 +89,12 @@
 
 - (void) magnifyWithEvent:(NSEvent *)event
 {
+    CGPoint locationInWindow      = [event locationInWindow];
+    CGPoint locationInSelf        = [self convertPoint:locationInWindow fromView:nil];
+    CGPoint locationInChannelView = [_channelView convertPoint:locationInWindow fromView:nil];
+
+    CGFloat percentX = locationInChannelView.x / [_channelView frame].size.width;
+
     _magnification *= ([event magnification] + 1);
     if (_magnification < 1) _magnification = 1;
 
@@ -98,6 +104,9 @@
 
     [_channelView setFrame:frame];
     [_channelView setMagnification:_magnification];
+    
+    CGFloat scrollOffset = percentX * frame.size.width - locationInSelf.x;
+    [_channelView scrollPoint:CGPointMake(scrollOffset, 0)];
 }
 
 
