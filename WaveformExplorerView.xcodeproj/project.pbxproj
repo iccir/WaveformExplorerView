@@ -81,6 +81,7 @@
 				557493241887EB2E00F7AD99 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		557493241887EB2E00F7AD99 /* Products */ = {
 			isa = PBXGroup;
