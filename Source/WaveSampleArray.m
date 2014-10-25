@@ -51,10 +51,10 @@
 
 - (id) initWithSamples:(float *)samples count:(NSUInteger)count
 {
-    NSUInteger length = sizeof(float) * count;
+    NSUInteger size = sizeof(float) * count;
     
-    float *samplesCopy = malloc(length);
-    memcpy(samplesCopy, samples, length);
+    float *samplesCopy = malloc(size);
+    memcpy(samplesCopy, samples, size);
     
     return [self initWithSamplesNoCopy:samplesCopy count:count freeWhenDone:YES];
 }
