@@ -24,6 +24,9 @@
 #import "WaveExplorerView.h"
 #import "WaveChannelView.h"
 
+#import <tgmath.h>
+
+
 @implementation WaveExplorerView {
     NSScrollView     *_scrollView;
     WaveChannelView  *_channelView;

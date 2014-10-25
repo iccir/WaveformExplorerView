@@ -26,6 +26,7 @@
 #import "WaveExplorerView.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <tgmath.h>
 
 static NSString * const sTileIndexKey = @"tile-index";
 
