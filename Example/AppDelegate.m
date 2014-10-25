@@ -32,7 +32,18 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"liberty_bell" ofType:@"m4a"];
+    NSString *path = nil;
+    
+    NSArray *processArguments = [[NSProcessInfo processInfo] arguments];
+    
+    if (processArguments.count <= 1) {
+        path = [[NSBundle mainBundle] pathForResource:@"liberty_bell" ofType:@"m4a"];
+    }
+    else {
+        NSString *rawPath = processArguments[1];
+        path = [rawPath stringByExpandingTildeInPath];
+    }
+	
     NSURL *url = [NSURL fileURLWithPath:path];
     
     __weak id weakSelf = self;
