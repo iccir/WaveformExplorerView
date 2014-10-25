@@ -26,6 +26,8 @@
 @class WaveExplorerView;
 
 @interface WaveChildView : NSView
+
 - (void) enclosingExplorerViewDidUpdateStyle;
 - (WaveExplorerView *) enclosingExplorerView;
+
 @end
