@@ -56,7 +56,7 @@
     _waveBackgroundColor = [NSColor whiteColor];
     _waveForegroundColor = [NSColor blackColor];
 
-    _magnification = 1;
+    _magnification = 1.0;
 
     [self setWantsLayer:YES];
     [[self layer] setMasksToBounds:YES];
@@ -83,7 +83,7 @@
     [self addSubview:_scrollView];
 
     [_channelView setFrame:[self bounds]];
-    [_channelView setMagnification:1];
+    [_channelView setMagnification:1.0];
 }
 
 
@@ -95,8 +95,8 @@
 
     CGFloat percentX = locationInChannelView.x / [_channelView frame].size.width;
 
-    _magnification *= ([event magnification] + 1);
-    if (_magnification < 1) _magnification = 1;
+    _magnification *= ([event magnification] + 1.0);
+    if (_magnification < 1.0) _magnification = 1.0;
 
     NSRect frame = [self bounds];
     frame.size.width *= _magnification;
@@ -106,7 +106,7 @@
     [_channelView setMagnification:_magnification];
     
     CGFloat scrollOffset = percentX * frame.size.width - locationInSelf.x;
-    [_channelView scrollPoint:CGPointMake(scrollOffset, 0)];
+    [_channelView scrollPoint:CGPointMake(scrollOffset, 0.0)];
 }
 
 
