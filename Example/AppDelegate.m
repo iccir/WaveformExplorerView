@@ -104,29 +104,29 @@
         SInt64 framesRemaining = fileLengthFrames;
         SInt64 bytesRemaining = framesRemaining * clientFormat.mBytesPerFrame;
         SInt64 bytesRead = 0;
-
+        
         bytesTotal = bytesRemaining;
         bytes = malloc(bytesTotal);
-
+        
         while (1 && (err == noErr)) {
             AudioBufferList fillBufferList;
             fillBufferList.mNumberBuffers = 1;
             fillBufferList.mBuffers[0].mNumberChannels = clientFormat.mChannelsPerFrame;
             fillBufferList.mBuffers[0].mDataByteSize = (UInt32)bytesRemaining;
             fillBufferList.mBuffers[0].mData = &bytes[bytesRead];
-        
+            
             UInt32 frameCount = (UInt32)framesRemaining;
             err = ExtAudioFileRead(audioFile, &frameCount, &fillBufferList);
-
+            
             if (frameCount == 0) {
                 break;
             }
             
             framesRemaining -= frameCount;
-        
+            
             bytesRead       += frameCount * clientFormat.mBytesPerFrame;
             bytesRemaining  -= frameCount * clientFormat.mBytesPerFrame;
-
+            
             if (framesRemaining == 0) {
                 break;
             }
