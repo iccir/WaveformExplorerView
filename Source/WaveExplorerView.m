@@ -63,29 +63,32 @@
 
     [self setWantsLayer:YES];
     [[self layer] setMasksToBounds:YES];
-
-    _scrollView = [[NSScrollView alloc] initWithFrame:[self bounds]];
-    [_scrollView setWantsLayer:YES];
-
-    _channelView = [[WaveChannelView alloc] initWithFrame:[self bounds]];
     
-    [_scrollView setDocumentView:_channelView];
+    NSRect bounds = self.bounds;
+    
+    _scrollView = [[NSScrollView alloc] initWithFrame:bounds];
+    [_scrollView setWantsLayer:YES];
     
     [_scrollView setBorderType:NSNoBorder];
     
     [_scrollView setHasHorizontalScroller:YES];
     [_scrollView setHasVerticalScroller:NO];
     [_scrollView setAutohidesScrollers:NO];
-
-    [_channelView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
+    
     [[_scrollView contentView] setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
     [_scrollView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 
     [_scrollView flashScrollers];
 
+    _channelView = [[WaveChannelView alloc] initWithFrame:bounds];
+    
+    [_scrollView setDocumentView:_channelView];
+
+    [_channelView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
+
     [self addSubview:_scrollView];
 
-    [_channelView setFrame:[self bounds]];
+    [_channelView setFrame:bounds];
     [_channelView setMagnification:1.0];
 }
 
