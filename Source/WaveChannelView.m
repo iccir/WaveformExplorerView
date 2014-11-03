@@ -73,7 +73,10 @@
     if ([_activeRepresentation tileCount] != newTileCount) {
         NSInteger sampleCount = [[self enclosingScrollView] frame].size.width * newTileCount;
 
-        WaveRepresentationView *rep = [[WaveRepresentationView alloc] initWithFrame:[self bounds] delegate:self tileCount:newTileCount sampleCount:sampleCount];
+        WaveRepresentationView *rep = [[WaveRepresentationView alloc] initWithFrame:self.bounds
+                                                                           delegate:self
+                                                                          tileCount:newTileCount
+                                                                        sampleCount:sampleCount];
 
         if (!_representations) _representations = [NSMutableArray array];
         [_representations addObject:rep];
