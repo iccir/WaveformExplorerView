@@ -85,7 +85,7 @@
         clientFormat.mFramesPerPacket  = 1;
         clientFormat.mBytesPerFrame    = clientFormat.mFramesPerPacket * clientFormat.mBytesPerPacket;
         clientFormat.mChannelsPerFrame = channels;
-        clientFormat.mBitsPerChannel   = sizeof(float) * 8;
+        clientFormat.mBitsPerChannel   = sizeof(float) * CHAR_BIT;
 
         err = ExtAudioFileSetProperty(audioFile, kExtAudioFileProperty_ClientDataFormat, sizeof(clientFormat), &clientFormat);
     }
