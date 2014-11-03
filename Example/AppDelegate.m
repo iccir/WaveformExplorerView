@@ -98,12 +98,12 @@
     }
     
     UInt8 *bytes = NULL;
-    NSInteger bytesTotal = 0;
+    SInt64 bytesTotal = 0;
 
     if (err == noErr) {
-        NSInteger framesRemaining = fileLengthFrames;
-        NSInteger bytesRemaining = framesRemaining * clientFormat.mBytesPerFrame;
-        NSInteger bytesRead = 0;
+        SInt64 framesRemaining = fileLengthFrames;
+        SInt64 bytesRemaining = framesRemaining * clientFormat.mBytesPerFrame;
+        SInt64 bytesRead = 0;
 
         bytesTotal = bytesRemaining;
         bytes = malloc(bytesTotal);
@@ -135,7 +135,7 @@
     
     NSData *data = nil;
     if (err == noErr) {
-        data = [NSData dataWithBytesNoCopy:bytes length:bytesTotal freeWhenDone:NO]; // Freed by WaveSampleArray.
+        data = [NSData dataWithBytesNoCopy:bytes length:(NSInteger)bytesTotal freeWhenDone:NO]; // Freed by WaveSampleArray.
     } else {
         free(bytes);
     }
