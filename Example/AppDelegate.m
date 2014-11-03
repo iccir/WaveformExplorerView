@@ -135,7 +135,7 @@
     
     NSData *data = nil;
     if (err == noErr) {
-        data = [NSData dataWithBytesNoCopy:bytes length:bytesTotal freeWhenDone:YES];
+        data = [NSData dataWithBytesNoCopy:bytes length:bytesTotal freeWhenDone:NO]; // Freed by WaveSampleArray.
     } else {
         free(bytes);
     }
@@ -152,10 +152,7 @@
 
 - (void) _didLoadWithData:(NSData *)data
 {
-    float *samples = (float *)[data bytes];
-    NSUInteger count = [data length] / sizeof(float);
-    
-    WaveSampleArray *sampleArray = [[WaveSampleArray alloc] initWithSamples:samples count:count];
+    WaveSampleArray *sampleArray = [[WaveSampleArray alloc] initWithData:data freeWhenDone:YES];
 
     [[self waveExplorerView] setSampleArray:sampleArray];
 }

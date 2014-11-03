@@ -77,6 +77,13 @@
     return self;
 }
 
+- (id) initWithData:(NSData *)data freeWhenDone:(BOOL)b;
+{
+    float *samples = (float *)[data bytes];
+    NSUInteger count = [data length] / sizeof(float);
+    
+    return [self initWithSamplesNoCopy:samples count:count freeWhenDone:b];
+}
 
 - (void) dealloc
 {
