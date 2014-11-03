@@ -24,6 +24,8 @@
 #import "WaveExplorerView.h"
 #import "WaveChannelView.h"
 
+#import "NSScrollView+JXSizeExtensions.h"
+
 #import <tgmath.h>
 
 
@@ -80,7 +82,9 @@
 
     [_scrollView flashScrollers];
 
-    _channelView = [[WaveChannelView alloc] initWithFrame:bounds];
+    NSRect contentRect = [_scrollView contentRectForFrameRectJX:bounds];
+    
+    _channelView = [[WaveChannelView alloc] initWithFrame:contentRect];
     
     [_scrollView setDocumentView:_channelView];
 
@@ -88,7 +92,7 @@
 
     [self addSubview:_scrollView];
 
-    [_channelView setFrame:bounds];
+    [_channelView setFrame:contentRect];
     [_channelView setMagnification:1.0];
 }
 
@@ -105,7 +109,7 @@
     if (_magnification < 1.0) _magnification = 1.0;
 
     NSRect bounds = self.bounds;
-    NSRect frame = bounds;
+    NSRect frame = [_scrollView contentRectForFrameRectJX:bounds];
     frame.size.width *= _magnification;
     frame.size.width = floor(frame.size.width);
 

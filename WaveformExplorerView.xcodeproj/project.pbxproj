@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1ED93A1A07B76E002B82BD /* NSScrollView+JXSizeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1ED9391A07B76E002B82BD /* NSScrollView+JXSizeExtensions.m */; };
 		5521DE9E188E79F900222363 /* WaveRepresentationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5521DE9D188E79F900222363 /* WaveRepresentationView.m */; };
 		5521DEA7188E7A2300222363 /* liberty_bell.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5521DE9F188E7A2300222363 /* liberty_bell.m4a */; };
 		5521DEA8188E7A2300222363 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5521DEA1188E7A2300222363 /* AppDelegate.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D1ED9381A07B76E002B82BD /* NSScrollView+JXSizeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+JXSizeExtensions.h"; sourceTree = "<group>"; };
+		3D1ED9391A07B76E002B82BD /* NSScrollView+JXSizeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+JXSizeExtensions.m"; sourceTree = "<group>"; };
 		5521DE9C188E79F900222363 /* WaveRepresentationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveRepresentationView.h; path = Source/WaveRepresentationView.h; sourceTree = "<group>"; };
 		5521DE9D188E79F900222363 /* WaveRepresentationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveRepresentationView.m; path = Source/WaveRepresentationView.m; sourceTree = "<group>"; };
 		5521DE9F188E7A2300222363 /* liberty_bell.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = liberty_bell.m4a; path = Example/liberty_bell.m4a; sourceTree = SOURCE_ROOT; };
@@ -72,9 +75,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D1ED9371A07B6C6002B82BD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				3D1ED9381A07B76E002B82BD /* NSScrollView+JXSizeExtensions.h */,
+				3D1ED9391A07B76E002B82BD /* NSScrollView+JXSizeExtensions.m */,
+			);
+			name = Categories;
+			path = Source;
+			sourceTree = "<group>";
+		};
 		5574931A1887EB2E00F7AD99 = {
 			isa = PBXGroup;
 			children = (
+				3D1ED9371A07B6C6002B82BD /* Categories */,
 				55FF7301188C955B00A8644D /* Classes */,
 				5574932C1887EB2E00F7AD99 /* Example App */,
 				557493251887EB2E00F7AD99 /* Frameworks */,
@@ -217,6 +231,7 @@
 				5521DE9E188E79F900222363 /* WaveRepresentationView.m in Sources */,
 				556E0E02188B659E005D80BF /* WaveSampleArray.m in Sources */,
 				55FF7304188C97F500A8644D /* WaveChildView.m in Sources */,
+				3D1ED93A1A07B76E002B82BD /* NSScrollView+JXSizeExtensions.m in Sources */,
 				5521DEA9188E7A2300222363 /* main.m in Sources */,
 				5521DEA8188E7A2300222363 /* AppDelegate.m in Sources */,
 			);
