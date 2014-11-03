@@ -104,7 +104,8 @@
     _magnification *= ([event magnification] + 1.0);
     if (_magnification < 1.0) _magnification = 1.0;
 
-    NSRect frame = [self bounds];
+    NSRect bounds = self.bounds;
+    NSRect frame = bounds;
     frame.size.width *= _magnification;
     frame.size.width = floor(frame.size.width);
 
