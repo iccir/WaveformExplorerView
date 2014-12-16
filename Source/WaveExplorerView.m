@@ -28,6 +28,9 @@
 
 #import <tgmath.h>
 
+@interface WaveExplorerView ()
+@property (nonatomic, assign) CGFloat magnification;
+@end
 
 @implementation WaveExplorerView {
     NSScrollView     *_scrollView;
@@ -98,15 +101,28 @@
 
 
 - (void) magnifyWithEvent:(NSEvent *)event
+
+
+#pragma mark *** Zoom/Scroll Utilities ***
+
+
+- (void) scrollAndZoomForEvent:(NSEvent *)event
 {
     CGPoint locationInWindow      = [event locationInWindow];
     CGPoint locationInSelf        = [self convertPoint:locationInWindow fromView:nil];
-    CGPoint locationInChannelView = [_channelView convertPoint:locationInWindow fromView:nil];
+    
+    BOOL isExactLocation = YES;
+    
+    [self scrollAndZoomForLocationInSelf:locationInSelf
+                           exactLocation:isExactLocation];
+}
 
+- (void) scrollAndZoomForLocationInSelf:(CGPoint)locationInSelf
+                          exactLocation:(BOOL)isExactLocation
+{
+    CGPoint locationInChannelView = [_channelView convertPoint:locationInSelf fromView:self];
+    
     CGFloat percentX = locationInChannelView.x / [_channelView frame].size.width;
-
-    _magnification *= ([event magnification] + 1.0);
-    if (_magnification < 1.0) _magnification = 1.0;
 
     NSRect bounds = self.bounds;
     NSRect frame = [_scrollView contentRectForFrameRectJX:bounds];
@@ -121,6 +137,15 @@
 }
 
 
+#pragma mark *** Gesture Event Handling ***
+
+- (void) magnifyWithEvent:(NSEvent *)event
+{
+    self.magnification *= ([event magnification] + 1.0);
+
+    [self scrollAndZoomForEvent:event];
+}
+
 - (void) endGestureWithEvent:(NSEvent *)event
 {
     [_channelView cleanup];
@@ -128,6 +153,20 @@
 
 
 #pragma mark - Accessors
+
+- (CGFloat) magnification
+{
+    return _magnification;
+}
+
+- (void) setMagnification:(CGFloat)magnification
+{
+    if (_magnification != magnification) {
+        _magnification = magnification;
+        // Limit to maximum zoom!
+        _magnification = MAX(_magnification, 1.0);
+    }
+}
 
 - (void) setSampleArray:(WaveSampleArray *)sampleArray
 {
