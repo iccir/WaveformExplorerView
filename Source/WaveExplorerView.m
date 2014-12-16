@@ -123,12 +123,12 @@
     CGPoint locationInChannelView = [_channelView convertPoint:locationInSelf fromView:self];
     
     CGFloat percentX = locationInChannelView.x / [_channelView frame].size.width;
-
+    
     NSRect bounds = self.bounds;
     NSRect frame = [_scrollView contentRectForFrameRectJX:bounds];
     frame.size.width *= _magnification;
     frame.size.width = floor(frame.size.width);
-
+    
     [_channelView setFrame:frame];
     [_channelView setMagnification:_magnification];
     
