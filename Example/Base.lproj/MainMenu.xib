@@ -666,8 +666,6 @@
         <customObject id="494" customClass="AppDelegate">
             <connections>
                 <outlet property="waveExplorerView" destination="cSR-bz-lxO" id="Sb3-DG-QLf"/>
-                <outlet property="waveSampleView" destination="cSR-bz-lxO" id="WZH-I5-Qcj"/>
-                <outlet property="waveformView" destination="cSR-bz-lxO" id="m0K-u4-QhP"/>
                 <outlet property="window" destination="371" id="onj-cS-lhY"/>
             </connections>
         </customObject>
