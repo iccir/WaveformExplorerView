@@ -115,10 +115,16 @@
         if (i + length > _count) {
             length = (_count - i);
         }
+        
+        if (length == 0) {
+            output[o] = 0.0;
+            return;
+        }
 
         // Cheat #2: Only check for max value and not both max and min
         float max;
         vDSP_maxv(&input[i], 1, &max, length);
+        //assert(max != -INFINITY);
         
         output[o] = max;
     });
