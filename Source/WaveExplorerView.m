@@ -41,7 +41,9 @@
 
 - (id) initWithFrame:(NSRect)frameRect
 {
-    if (self = [super initWithFrame:frameRect]) {
+    self = [super initWithFrame:frameRect];
+    
+    if (self) {
         [self _setupWaveformView];
     }
     
@@ -51,7 +53,9 @@
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder]) {
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
         [self _setupWaveformView];
     }
     
