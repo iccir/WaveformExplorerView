@@ -104,11 +104,97 @@
 }
 
 
-- (void) magnifyWithEvent:(NSEvent *)event
+#pragma mark *** Key Event Handling ***
+
+// Make us able to -becomeFirstResponder, so we can receive key events.
+- (BOOL) acceptsFirstResponder
+{
+    return YES;
+}
+
+- (void) keyDown:(NSEvent *)event
+{
+    BOOL didProcess = NO;
+    
+    NSString *characters = [event characters];
+    if (characters && ([characters length] > 0)) {
+        unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+        
+        if (((key == '+') || (key == '-'))) {
+            NSRect bounds = self.bounds;
+            CGPoint locationInSelf = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+            switch (key) {
+                case '+':
+                    [self increaseMagnification];
+                    
+                    [self scrollAndZoomForLocationInSelf:locationInSelf
+                                           exactLocation:NO];
+                    
+                    didProcess = YES;
+                    break;
+                    
+                case '-':
+                    [self decreaseMagnification];
+                    
+                    [self scrollAndZoomForLocationInSelf:locationInSelf
+                                           exactLocation:NO];
+                    
+                    didProcess = YES;
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+    
+    if (didProcess == NO) {
+        return [super keyDown:event];
+    }
+}
+
+
+#pragma mark *** Mouse Event Handling ***
+
+// Always receive -mouseDown: messages for clicks that occur in our view,
+// even if the click is one that’s activating the window.
+// This lets the user start interacting with the contents without having to click again.
+- (BOOL) acceptsFirstMouse
+{
+    return YES;
+}
+
+// User clicked the main mouse button inside our view.
+- (void) mouseDown:(NSEvent *)event
+{
+    NSEventModifierFlags modifierFlags = [event modifierFlags];
+    if (modifierFlags & NSCommandKeyMask) {
+        if ((modifierFlags & NSShiftKeyMask)) {
+            [self decreaseMagnification];
+        } else {
+            [self increaseMagnification];
+        }
+        
+        [self scrollAndZoomForEvent:event];
+    }
+
+    // Make us the window’s firstResponder when clicked.
+    [[self window] makeFirstResponder:self];
+}
+
 
 
 #pragma mark *** Zoom/Scroll Utilities ***
 
+- (void) increaseMagnification
+{
+    self.magnification *= 2.0;
+}
+
+- (void) decreaseMagnification
+{
+    self.magnification /= 2.0;
+}
 
 - (void) scrollAndZoomForEvent:(NSEvent *)event
 {
@@ -125,9 +211,36 @@
                           exactLocation:(BOOL)isExactLocation
 {
     CGPoint locationInChannelView = [_channelView convertPoint:locationInSelf fromView:self];
+    CGFloat channelViewWidth = [_channelView frame].size.width;
     
-    CGFloat percentX = locationInChannelView.x / [_channelView frame].size.width;
+    BOOL isNearBeginning = NO;
+    BOOL isNearEnd = NO;
     
+    BOOL snapToEnds = YES;
+    
+    if (snapToEnds && (isExactLocation == NO)) {
+        // Determine, if our viewport touches the beginning or end of the channel view.
+        // We could make this fuzzy.
+        CGRect bounds = self.bounds;
+        CGRect selfBoundsInChannelView = [_channelView convertRect:bounds fromView:self];
+        if (CGRectGetMinX(selfBoundsInChannelView) == 0.0) {
+            isNearBeginning = YES;
+        } else if (CGRectGetMaxX(selfBoundsInChannelView) == channelViewWidth) {
+            isNearEnd = YES;
+        }
+    }
+    
+    CGFloat percentX;
+    if (isNearBeginning) {
+        percentX = 0.0;
+    }
+    else if (isNearEnd) {
+        percentX = 1.0;
+    }
+    else {
+        percentX = locationInChannelView.x / channelViewWidth;
+    }
+
     NSRect bounds = self.bounds;
     NSRect frame = [_scrollView contentRectForFrameRectJX:bounds];
     frame.size.width *= _magnification;
