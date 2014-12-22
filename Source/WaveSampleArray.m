@@ -103,7 +103,7 @@
     float *output = malloc(outCount * sizeof(float));
     
     dispatch_apply(outCount, dispatch_get_global_queue(0, 0), ^(size_t o) {
-        NSInteger i = llrintf(o * stride);
+        NSInteger i = llrint(o * stride);
 
         // We cheat twice for performance, we can get away with this because we
         // are dealing with audio waveforms.
