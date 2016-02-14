@@ -37,10 +37,10 @@ typedef NS_ENUM(NSInteger, WaveRepresentationState) {
 
 @interface WaveRepresentationView : WaveChildView
 
-- (id) initWithFrame: (NSRect) frameRect
-            delegate: (id<WaveRepresentationDelegate>)delegate
-           tileCount: (NSUInteger) tileCount
-         sampleCount: (NSUInteger) sampleCount;
+- (id) initWithFrame:(NSRect)frameRect
+            delegate:(id<WaveRepresentationDelegate>)delegate
+           tileCount:(NSUInteger)tileCount
+         sampleCount:(NSUInteger)sampleCount;
 
 - (void) loadSampleArray:(WaveSampleArray *)sampleArray;
 - (void) kill;

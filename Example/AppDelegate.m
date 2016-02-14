@@ -32,7 +32,18 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"liberty_bell" ofType:@"m4a"];
+    NSString *path = nil;
+    
+    NSArray *processArguments = [[NSProcessInfo processInfo] arguments];
+    
+    if (processArguments.count <= 1) {
+        path = [[NSBundle mainBundle] pathForResource:@"liberty_bell" ofType:@"m4a"];
+    }
+    else {
+        NSString *rawPath = processArguments[1];
+        path = [rawPath stringByExpandingTildeInPath];
+    }
+	
     NSURL *url = [NSURL fileURLWithPath:path];
     
     __weak id weakSelf = self;
@@ -74,7 +85,7 @@
         clientFormat.mFramesPerPacket  = 1;
         clientFormat.mBytesPerFrame    = clientFormat.mFramesPerPacket * clientFormat.mBytesPerPacket;
         clientFormat.mChannelsPerFrame = channels;
-        clientFormat.mBitsPerChannel   = sizeof(float) * 8;
+        clientFormat.mBitsPerChannel   = sizeof(float) * CHAR_BIT;
 
         err = ExtAudioFileSetProperty(audioFile, kExtAudioFileProperty_ClientDataFormat, sizeof(clientFormat), &clientFormat);
     }
@@ -87,35 +98,35 @@
     }
     
     UInt8 *bytes = NULL;
-    NSInteger bytesTotal = 0;
+    SInt64 bytesTotal = 0;
 
     if (err == noErr) {
-        NSInteger framesRemaining = fileLengthFrames;
-        NSInteger bytesRemaining = framesRemaining * clientFormat.mBytesPerFrame;
-        NSInteger bytesRead = 0;
-
+        SInt64 framesRemaining = fileLengthFrames;
+        SInt64 bytesRemaining = framesRemaining * clientFormat.mBytesPerFrame;
+        SInt64 bytesRead = 0;
+        
         bytesTotal = bytesRemaining;
         bytes = malloc(bytesTotal);
-
+        
         while (1 && (err == noErr)) {
             AudioBufferList fillBufferList;
             fillBufferList.mNumberBuffers = 1;
             fillBufferList.mBuffers[0].mNumberChannels = clientFormat.mChannelsPerFrame;
             fillBufferList.mBuffers[0].mDataByteSize = (UInt32)bytesRemaining;
             fillBufferList.mBuffers[0].mData = &bytes[bytesRead];
-        
+            
             UInt32 frameCount = (UInt32)framesRemaining;
             err = ExtAudioFileRead(audioFile, &frameCount, &fillBufferList);
-
+            
             if (frameCount == 0) {
                 break;
             }
             
             framesRemaining -= frameCount;
-        
+            
             bytesRead       += frameCount * clientFormat.mBytesPerFrame;
             bytesRemaining  -= frameCount * clientFormat.mBytesPerFrame;
-
+            
             if (framesRemaining == 0) {
                 break;
             }
@@ -124,7 +135,7 @@
     
     NSData *data = nil;
     if (err == noErr) {
-        data = [NSData dataWithBytesNoCopy:bytes length:bytesTotal freeWhenDone:YES];
+        data = [NSData dataWithBytesNoCopy:bytes length:(NSInteger)bytesTotal freeWhenDone:NO]; // Freed by WaveSampleArray.
     } else {
         free(bytes);
     }
@@ -141,10 +152,7 @@
 
 - (void) _didLoadWithData:(NSData *)data
 {
-    float *samples = (float *)[data bytes];
-    NSUInteger count = [data length] / sizeof(float);
-    
-    WaveSampleArray *sampleArray = [[WaveSampleArray alloc] initWithSamples:samples count:count];
+    WaveSampleArray *sampleArray = [[WaveSampleArray alloc] initWithData:data freeWhenDone:YES];
 
     [[self waveExplorerView] setSampleArray:sampleArray];
 }

@@ -51,10 +51,10 @@
 
 - (id) initWithSamples:(float *)samples count:(NSUInteger)count
 {
-    NSUInteger length = sizeof(float) * count;
+    NSUInteger size = sizeof(float) * count;
     
-    float *samplesCopy = malloc(length);
-    memcpy(samplesCopy, samples, length);
+    float *samplesCopy = malloc(size);
+    memcpy(samplesCopy, samples, size);
     
     return [self initWithSamplesNoCopy:samplesCopy count:count freeWhenDone:YES];
 }
@@ -77,6 +77,13 @@
     return self;
 }
 
+- (id) initWithData:(NSData *)data freeWhenDone:(BOOL)b;
+{
+    float *samples = (float *)[data bytes];
+    NSUInteger count = [data length] / sizeof(float);
+    
+    return [self initWithSamplesNoCopy:samples count:count freeWhenDone:b];
+}
 
 - (void) dealloc
 {
@@ -96,7 +103,7 @@
     float *output = malloc(outCount * sizeof(float));
     
     dispatch_apply(outCount, dispatch_get_global_queue(0, 0), ^(size_t o) {
-        NSInteger i = llrintf(o * stride);
+        NSInteger i = llrint(o * stride);
 
         // We cheat twice for performance, we can get away with this because we
         // are dealing with audio waveforms.
@@ -108,10 +115,16 @@
         if (i + length > _count) {
             length = (_count - i);
         }
+        
+        if (length == 0) {
+            output[o] = 0.0;
+            return;
+        }
 
         // Cheat #2: Only check for max value and not both max and min
         float max;
         vDSP_maxv(&input[i], 1, &max, length);
+        //assert(max != -INFINITY);
         
         output[o] = max;
     });

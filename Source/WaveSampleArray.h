@@ -33,6 +33,8 @@
 - (id) initWithSamplesNoCopy:(float *)samples count:(NSUInteger)count;
 - (id) initWithSamplesNoCopy:(float *)samples count:(NSUInteger)count freeWhenDone:(BOOL)b;
 
+- (id) initWithData:(NSData *)data freeWhenDone:(BOOL)b; // Assumes immutable data.
+
 - (WaveSampleArray *) sampleArrayWithCount:(NSUInteger)count;
 
 - (float *) samples NS_RETURNS_INNER_POINTER;

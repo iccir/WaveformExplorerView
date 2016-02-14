@@ -26,6 +26,7 @@
 #import "WaveExplorerView.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <tgmath.h>
 
 static NSString * const sTileIndexKey = @"tile-index";
 
@@ -43,10 +44,10 @@ static NSString * const sTileIndexKey = @"tile-index";
 }
 
 
-- (id) initWithFrame: (NSRect) frameRect
-            delegate: (id<WaveRepresentationDelegate>)delegate
-           tileCount: (NSUInteger) tileCount
-         sampleCount: (NSUInteger) sampleCount
+- (id) initWithFrame:(NSRect)frameRect
+            delegate:(id<WaveRepresentationDelegate>)delegate
+           tileCount:(NSUInteger)tileCount
+         sampleCount:(NSUInteger)sampleCount
 {
     if ((self = [super initWithFrame:frameRect])) {
         _tileCount   = tileCount;

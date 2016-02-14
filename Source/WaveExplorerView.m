@@ -24,6 +24,14 @@
 #import "WaveExplorerView.h"
 #import "WaveChannelView.h"
 
+#import "NSScrollView+JXSizeExtensions.h"
+
+#import <tgmath.h>
+
+@interface WaveExplorerView ()
+@property (nonatomic, assign) CGFloat magnification;
+@end
+
 @implementation WaveExplorerView {
     NSScrollView     *_scrollView;
     WaveChannelView  *_channelView;
@@ -33,7 +41,9 @@
 
 - (id) initWithFrame:(NSRect)frameRect
 {
-    if (self = [super initWithFrame:frameRect]) {
+    self = [super initWithFrame:frameRect];
+    
+    if (self) {
         [self _setupWaveformView];
     }
     
@@ -43,7 +53,9 @@
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder]) {
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
         [self _setupWaveformView];
     }
     
@@ -56,59 +68,200 @@
     _waveBackgroundColor = [NSColor whiteColor];
     _waveForegroundColor = [NSColor blackColor];
 
-    _magnification = 1;
+    _magnification = 1.0;
 
     [self setWantsLayer:YES];
     [[self layer] setMasksToBounds:YES];
-
-    _scrollView = [[NSScrollView alloc] initWithFrame:[self bounds]];
-    [_scrollView setWantsLayer:YES];
-
-    _channelView = [[WaveChannelView alloc] initWithFrame:[self bounds]];
     
-    [_scrollView setDocumentView:_channelView];
+    NSRect bounds = self.bounds;
+    
+    _scrollView = [[NSScrollView alloc] initWithFrame:bounds];
+    [_scrollView setWantsLayer:YES];
     
     [_scrollView setBorderType:NSNoBorder];
     
     [_scrollView setHasHorizontalScroller:YES];
     [_scrollView setHasVerticalScroller:NO];
     [_scrollView setAutohidesScrollers:NO];
-
-    [_channelView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
+    
     [[_scrollView contentView] setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
     [_scrollView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 
     [_scrollView flashScrollers];
 
+    NSRect contentRect = [_scrollView contentRectForFrameRectJX:bounds];
+    
+    _channelView = [[WaveChannelView alloc] initWithFrame:contentRect];
+    
+    [_scrollView setDocumentView:_channelView];
+
+    [_channelView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
+
     [self addSubview:_scrollView];
 
-    [_channelView setFrame:[self bounds]];
-    [_channelView setMagnification:1];
+    [_channelView setFrame:contentRect];
+    [_channelView setMagnification:1.0];
 }
 
 
-- (void) magnifyWithEvent:(NSEvent *)event
+#pragma mark *** Key Event Handling ***
+
+// Make us able to -becomeFirstResponder, so we can receive key events.
+- (BOOL) acceptsFirstResponder
+{
+    return YES;
+}
+
+- (void) keyDown:(NSEvent *)event
+{
+    BOOL didProcess = NO;
+    
+    NSString *characters = [event characters];
+    if (characters && ([characters length] > 0)) {
+        unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+        
+        if (((key == '+') || (key == '-'))) {
+            NSRect bounds = self.bounds;
+            CGPoint locationInSelf = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+            switch (key) {
+                case '+':
+                    [self increaseMagnification];
+                    
+                    [self scrollAndZoomForLocationInSelf:locationInSelf
+                                           exactLocation:NO];
+                    
+                    didProcess = YES;
+                    break;
+                    
+                case '-':
+                    [self decreaseMagnification];
+                    
+                    [self scrollAndZoomForLocationInSelf:locationInSelf
+                                           exactLocation:NO];
+                    
+                    didProcess = YES;
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+    
+    if (didProcess == NO) {
+        return [super keyDown:event];
+    }
+}
+
+
+#pragma mark *** Mouse Event Handling ***
+
+// Always receive -mouseDown: messages for clicks that occur in our view,
+// even if the click is one that’s activating the window.
+// This lets the user start interacting with the contents without having to click again.
+- (BOOL) acceptsFirstMouse
+{
+    return YES;
+}
+
+// User clicked the main mouse button inside our view.
+- (void) mouseDown:(NSEvent *)event
+{
+    NSEventModifierFlags modifierFlags = [event modifierFlags];
+    if (modifierFlags & NSCommandKeyMask) {
+        if ((modifierFlags & NSShiftKeyMask)) {
+            [self decreaseMagnification];
+        } else {
+            [self increaseMagnification];
+        }
+        
+        [self scrollAndZoomForEvent:event];
+    }
+
+    // Make us the window’s firstResponder when clicked.
+    [[self window] makeFirstResponder:self];
+}
+
+
+
+#pragma mark *** Zoom/Scroll Utilities ***
+
+- (void) increaseMagnification
+{
+    self.magnification *= 2.0;
+}
+
+- (void) decreaseMagnification
+{
+    self.magnification /= 2.0;
+}
+
+- (void) scrollAndZoomForEvent:(NSEvent *)event
 {
     CGPoint locationInWindow      = [event locationInWindow];
     CGPoint locationInSelf        = [self convertPoint:locationInWindow fromView:nil];
-    CGPoint locationInChannelView = [_channelView convertPoint:locationInWindow fromView:nil];
+    
+    BOOL isExactLocation = YES;
+    
+    [self scrollAndZoomForLocationInSelf:locationInSelf
+                           exactLocation:isExactLocation];
+}
 
-    CGFloat percentX = locationInChannelView.x / [_channelView frame].size.width;
+- (void) scrollAndZoomForLocationInSelf:(CGPoint)locationInSelf
+                          exactLocation:(BOOL)isExactLocation
+{
+    CGPoint locationInChannelView = [_channelView convertPoint:locationInSelf fromView:self];
+    CGFloat channelViewWidth = [_channelView frame].size.width;
+    
+    BOOL isNearBeginning = NO;
+    BOOL isNearEnd = NO;
+    
+    BOOL snapToEnds = YES;
+    
+    if (snapToEnds && (isExactLocation == NO)) {
+        // Determine, if our viewport touches the beginning or end of the channel view.
+        // We could make this fuzzy.
+        CGRect bounds = self.bounds;
+        CGRect selfBoundsInChannelView = [_channelView convertRect:bounds fromView:self];
+        if (CGRectGetMinX(selfBoundsInChannelView) == 0.0) {
+            isNearBeginning = YES;
+        } else if (CGRectGetMaxX(selfBoundsInChannelView) == channelViewWidth) {
+            isNearEnd = YES;
+        }
+    }
+    
+    CGFloat percentX;
+    if (isNearBeginning) {
+        percentX = 0.0;
+    }
+    else if (isNearEnd) {
+        percentX = 1.0;
+    }
+    else {
+        percentX = locationInChannelView.x / channelViewWidth;
+    }
 
-    _magnification *= ([event magnification] + 1);
-    if (_magnification < 1) _magnification = 1;
-
-    NSRect frame = [self bounds];
+    NSRect bounds = self.bounds;
+    NSRect frame = [_scrollView contentRectForFrameRectJX:bounds];
     frame.size.width *= _magnification;
     frame.size.width = floor(frame.size.width);
-
+    
     [_channelView setFrame:frame];
     [_channelView setMagnification:_magnification];
     
     CGFloat scrollOffset = percentX * frame.size.width - locationInSelf.x;
-    [_channelView scrollPoint:CGPointMake(scrollOffset, 0)];
+    [_channelView scrollPoint:CGPointMake(scrollOffset, 0.0)];
 }
 
+
+#pragma mark *** Gesture Event Handling ***
+
+- (void) magnifyWithEvent:(NSEvent *)event
+{
+    self.magnification *= ([event magnification] + 1.0);
+
+    [self scrollAndZoomForEvent:event];
+}
 
 - (void) endGestureWithEvent:(NSEvent *)event
 {
@@ -117,6 +270,20 @@
 
 
 #pragma mark - Accessors
+
+- (CGFloat) magnification
+{
+    return _magnification;
+}
+
+- (void) setMagnification:(CGFloat)magnification
+{
+    if (_magnification != magnification) {
+        _magnification = magnification;
+        // Limit to maximum zoom!
+        _magnification = MAX(_magnification, 1.0);
+    }
+}
 
 - (void) setSampleArray:(WaveSampleArray *)sampleArray
 {

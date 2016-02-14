@@ -32,4 +32,5 @@
 
 @property (nonatomic, assign) CGFloat magnification;
 @property (nonatomic, strong) WaveSampleArray *sampleArray;
+
 @end
